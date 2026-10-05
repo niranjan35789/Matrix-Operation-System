@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>MatrixLab — C++ Matrix Calculator</title>
+<style>
+*{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;color:#eaf3ff;background:radial-gradient(circle at 10% 45%,#0b3445 0,#071624 35%,#070d1d 72%,#12132c 100%);min-height:100vh}
+header{height:74px;border-bottom:1px solid #1d2c3d;display:flex;align-items:center;justify-content:space-between;padding:0 5%;background:#07111f}
+.logo{display:flex;gap:12px;align-items:center}.logoBox{width:43px;height:43px;border-radius:12px;background:linear-gradient(135deg,#66cfff,#788bff);color:#071322;display:grid;place-items:center;font-size:23px;font-weight:900;box-shadow:0 0 25px #37bdf455}.brand{font-size:18px;font-weight:800}.sub{font-size:11px;color:#71849b;margin-top:3px}
+.online{border:1px solid #22364c;padding:9px 15px;border-radius:24px;background:#0d1928;color:#b8c8d9;font-size:13px}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#55efb1;box-shadow:0 0 8px #55efb1;margin-right:8px}
+.hero{display:grid;grid-template-columns:1.45fr .75fr;gap:55px;max-width:1320px;margin:72px auto 54px;padding:0 30px}.tag{color:#55c9ff;font-size:12px;font-weight:800;letter-spacing:2px}.hero h1{font-size:58px;line-height:1.02;margin:22px 0 20px;max-width:650px}.blue{color:#54c9ff}.hero p{color:#7890a9;max-width:700px;font-size:16px;line-height:1.7}.chips{display:flex;gap:9px;margin-top:27px}.chip{border:1px solid #21394d;padding:9px 14px;border-radius:9px;color:#91a6bc;font-size:12px;background:#0c1b2b}
+.support{align-self:center;border:1px solid #1d3549;background:#0c1a2b;padding:28px;border-radius:24px;box-shadow:0 20px 60px #0004}.support h3,.sideTitle,.smallTitle{font-size:11px;letter-spacing:2px;color:#4ecbff;margin:0 0 17px}.opsGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.opPill{padding:14px;border:1px solid #22364c;border-radius:12px;background:#132239;color:#9eafc2;font-size:13px}
+.app{max-width:1320px;margin:auto 30px 70px;border:1px solid #1e354b;border-radius:25px;background:#071526dd;display:grid;grid-template-columns:230px 1fr;overflow:hidden;box-shadow:0 25px 80px #0005}.sidebar{padding:30px 16px;border-right:1px solid #1b3045}.sideTitle{margin-left:9px;color:#8397ad}.nav{display:flex;gap:12px;padding:14px 12px;margin:3px 0;border-radius:12px;color:#8498ad;cursor:pointer;font-size:14px}.nav.active{background:#132744;color:#f1f7ff;box-shadow:inset 2px 0 #53c8ff}.main{padding:34px 30px 42px}.mainTop{display:flex;justify-content:space-between;align-items:center}.current{font-size:25px;font-weight:800;margin:0 0 24px}.sample{border:1px solid #263d54;background:#102035;color:#a9b9ca;padding:10px 15px;border-radius:10px;cursor:pointer}.matWrap{display:grid;grid-template-columns:1fr 50px 1fr;gap:20px;align-items:center}.card{border:1px solid #203b55;background:#0c2034;border-radius:18px;padding:18px}.cardTitle{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;font-weight:800}.badge{display:inline-grid;place-items:center;width:31px;height:31px;border-radius:9px;background:#103c59;color:#58caff;margin-right:9px}.sizes select{background:#091829;color:#cfe0ef;border:1px solid #203a50;border-radius:8px;padding:6px}.matrix{display:grid;gap:9px}.cell{width:100%;min-width:0;background:#07182a;border:1px solid #1b354d;border-radius:9px;color:#e6f3ff;padding:11px;text-align:center;outline:none}.cell:focus{border-color:#42bff4}.sign{width:38px;height:38px;border-radius:50%;background:#0e2a40;border:1px solid #204660;color:#52c9ff;display:grid;place-items:center;font-weight:bold}
+.result{margin-top:24px;border:1px solid #1d354b;background:#0a1b2c;border-radius:17px;padding:22px}.resultTitle{color:#7d93aa;font-size:12px;letter-spacing:1px;margin-bottom:13px}.resultGrid{display:grid;gap:8px;max-width:650px}.resultCell{background:#07172a;border:1px solid #1c344a;border-radius:8px;padding:12px;text-align:center}.message{color:#ffb7b7}.scalarBox{display:none;margin-top:15px}.scalarBox input{background:#07182a;color:white;border:1px solid #1d354b;padding:10px;border-radius:8px;width:100px}
+@media(max-width:850px){.hero{grid-template-columns:1fr;margin-top:45px}.hero h1{font-size:43px}.app{grid-template-columns:1fr;margin:0 15px 50px}.sidebar{border-right:0;border-bottom:1px solid #1b3045;display:flex;overflow:auto}.sideTitle{display:none}.nav{white-space:nowrap}.matWrap{grid-template-columns:1fr}.sign{margin:auto}.main{padding:25px 16px}.support{margin-top:10px}}
+</style>
+</head>
+<body>
+<header><div class="logo"><div class="logoBox">M</div><div><div class="brand">MatrixLab</div><div class="sub">C++ Matrix Operation System</div></div></div><div class="online"><span class="dot"></span>C++ Engine Online</div></header>
+
+<section class="hero">
+<div><div class="tag">MATRIX CALCULATOR · C++ POWERED</div><h1>Explore matrices.<br>Calculate <span class="blue">with confidence.</span></h1><p>Perform essential and intermediate matrix operations through a clean interface, while every calculation is executed by the C++ matrix engine.</p><div class="chips"><span class="chip">Fast</span><span class="chip">Interactive</span><span class="chip">Educational</span></div></div>
+<div class="support"><h3>SUPPORTED OPERATIONS</h3><div class="opsGrid"><div class="opPill">Addition</div><div class="opPill">Subtraction</div><div class="opPill">Multiplication</div><div class="opPill">Scalar</div><div class="opPill">Transpose</div><div class="opPill">Trace</div><div class="opPill">Determinant</div><div class="opPill">Power</div></div></div>
+</section>
+
+<section class="app">
+<aside class="sidebar"><div class="sideTitle">OPERATIONS</div>
+<div class="nav active" data-op="add">＋ &nbsp; Addition</div><div class="nav" data-op="sub">− &nbsp; Subtraction</div><div class="nav" data-op="mul">× &nbsp; Multiplication</div><div class="nav" data-op="scalar">λ &nbsp; Scalar Multiplication</div><div class="nav" data-op="transpose">↔ &nbsp; Transpose</div><div class="nav" data-op="trace">Σ &nbsp; Trace</div><div class="nav" data-op="det">|A| &nbsp; Determinant</div><div class="nav" data-op="power">Aⁿ &nbsp; Power</div></aside>
+
+<main class="main"><div class="mainTop"><div><div class="smallTitle">CURRENT OPERATION</div><h2 class="current" id="title">Matrix Addition</h2></div><button class="sample" onclick="loadSample()">Load Sample</button></div>
+<div class="matWrap">
+<div class="card"><div class="cardTitle"><div><span class="badge">A</span>Matrix A</div><div class="sizes"><select id="ar"></select> × <select id="ac"></select></div></div><div class="matrix" id="matrixA"></div><div class="scalarBox" id="scalarBox"><label>Scalar k: <input id="scalar" type="number" value="2"></label></div></div>
+<div class="sign" id="sign">+</div>
+<div class="card" id="bCard"><div class="cardTitle"><div><span class="badge">B</span>Matrix B</div><div class="sizes"><select id="br"></select> × <select id="bc"></select></div></div><div class="matrix" id="matrixB"></div></div>
+</div>
+<div class="result"><div class="resultTitle">RESULT</div><div id="result">Enter values and choose an operation.</div></div>
+</main></section>
+
+<script>
+let op='add';
+const names={add:'Matrix Addition',sub:'Matrix Subtraction',mul:'Matrix Multiplication',scalar:'Scalar Multiplication',transpose:'Matrix Transpose',trace:'Matrix Trace',det:'Matrix Determinant',power:'Matrix Power'};
+function fillSelect(id){let s=document.getElementById(id);s.innerHTML='';for(let i=1;i<=4;i++)s.innerHTML+=`<option value="${i}">${i}</option>`}
+['ar','ac','br','bc'].forEach(fillSelect);
+document.querySelectorAll('.nav').forEach(n=>n.onclick=()=>{document.querySelectorAll('.nav').forEach(x=>x.classList.remove('active'));n.classList.add('active');op=n.dataset.op;document.getElementById('title').textContent=names[op];updateUI();});
+['ar','ac','br','bc'].forEach(id=>document.getElementById(id).onchange=render);
+function updateUI(){
+ document.getElementById('bCard').style.display=['add','sub','mul'].includes(op)?'block':'none';
+ document.getElementById('sign').style.visibility=['add','sub','mul'].includes(op)?'visible':'hidden';
+ document.getElementById('scalarBox').style.display=op==='scalar'?'block':'none';
+ render();
+}
+function render(){make('matrixA',+ar.value,+ac.value,'a');make('matrixB',+br.value,+bc.value,'b');}
+function make(id,r,c,prefix){
+ let box=document.getElementById(id);box.style.gridTemplateColumns=`repeat(${c},1fr)`;box.innerHTML='';
+ for(let i=0;i<r;i++)for(let j=0;j<c;j++){let x=document.createElement('input');x.className='cell';x.type='number';x.step='any';x.id=`${prefix}${i}${j}`;x.value=(i===j?'1':'0');x.oninput=calculate;box.appendChild(x)}
+}
+function vals(prefix,r,c){let a=[];for(let i=0;i<r;i++)for(let j=0;j<c;j++)a.push(document.getElementById(`${prefix}${i}${j}`).value||0);return a.join(' ')}
+async function calculate(){
+ let r=+ar.value,c=+ac.value,br=+document.getElementById('br').value,bc=+document.getElementById('bc').value;
+ let q=new URLSearchParams({op,r,c,br,bc,a:vals('a',r,c),b:vals('b',br,bc),k:document.getElementById('scalar').value,n:document.getElementById('scalar').value});
+ try{let res=await fetch('/api?'+q.toString());let data=await res.json();show(data)}catch(e){document.getElementById('result').innerHTML='<div class="message">Start the C++ server first.</div>'}
+}
+function show(data){
+ if(data.error){document.getElementById('result').innerHTML='<div class="message">'+data.error+'</div>';return}
+ if('value' in data){document.getElementById('result').innerHTML='<b>'+Number(data.value.toFixed(6))+'</b>';return}
+ let rows=data.rows;let html='<div class="resultGrid" style="grid-template-columns:repeat('+rows[0].length+',1fr)">';
+ rows.forEach(row=>row.forEach(v=>html+='<div class="resultCell">'+Number(v.toFixed(6))+'</div>'));html+='</div>';document.getElementById('result').innerHTML=html;
+}
+function loadSample(){
+ ar.value=2;ac.value=2;br.value=2;bc.value=2;render();
+ const sampleA=[[1,2],[3,4]],sampleB=[[5,6],[7,8]];
+ sampleA.forEach((r,i)=>r.forEach((v,j)=>document.getElementById(`a${i}${j}`).value=v));
+ sampleB.forEach((r,i)=>r.forEach((v,j)=>document.getElementById(`b${i}${j}`).value=v));
+ calculate();
+}
+render();
+</script>
+</body>
+</html>
